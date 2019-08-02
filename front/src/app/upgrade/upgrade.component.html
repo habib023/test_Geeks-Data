@@ -1,0 +1,117 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col">
+      <div class="card card-upgrade">
+        <div class="card-header">
+          <h5 class="card-title">typage des attributs</h5>
+            <button class="btn btn-info" (click)="openLg(content)">Ajouter</button>
+          </div>
+        <div class="card card-plain">
+          <div class="table-responsive table-upgrade">
+              <table class="table">
+            <thead class=" text-primary">
+              <tr>
+               <th> </th>
+                <th>Code</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let synonymes of synonymes  ">
+                <td>
+                    <div class="font-icon-detail">
+                        <i class="now-ui-icons files_box"></i>
+                     </div>
+                </td>
+                <td>{{synonymes.code}}</td>
+                <td>
+                  <div class="font-icon-detail" ></div>
+                  <i class="now-ui-icons shopping_tag-content" (click)="openSm(content2,synonymes)"></i>
+                
+                  <div class="font-icon-detail">
+                    <i class="now-ui-icons ui-1_simple-remove"  (click)="deleteSyno(synonymes)" ></i>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #content let-modal>
+      <div class="modal-header">
+          <h4 class="modal-title">Ajouter Un  sysnonyme</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+          <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                  <label for="code">code : </label>
+                  <input type="text" formControlName="code" class="form-control"
+                         [ngClass]="{ 'is-invalid': submitted && f.code.errors }"/>
+                  <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+                      <div *ngIf="f.code.errors.required">code is required</div>
+                  </div>
+               </div>
+              <div class="form-group">
+                  <button class="btn btn-link"> Ajouter</button>
+              </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+      </div>
+    </ng-template>
+
+
+    <ng-template #content2 let-modal>
+      <div class="modal-header">
+          <h4 class="modal-title">Modifier</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+    
+      
+      <div class="modal-body">
+         
+        <form [formGroup]="UpdateForm" (ngSubmit)="onSubmit2(synonymes)">
+              
+              
+              
+          <div class="form-group">
+              <label for="code">code : </label>
+              <input type="text" formControlName="code" class="form-control"
+                     [ngClass]="{ 'is-invalid': submitted && f.code.errors }"/>
+              <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+                  <div *ngIf="f.code.errors.required">code is required</div>
+              </div>
+           </div>
+   
+
+
+          <div class="form-group">
+              <button class="btn btn-link"> Modifier</button>
+
+
+          </div>
+      </form>
+
+        
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+      </div>
+    </ng-template>
+
+
+
+    
